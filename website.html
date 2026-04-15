@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignBridge | Project Overview</title>
+    <style>
+        /* Modern Dark Mode UI */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #1e1e2e;
+            color: #f8f8f2;
+            overflow-x: hidden;
+        }
+
+        /* === LANDING PAGE STYLES === */
+        #landingPage {
+            width: 100%;
+            min-height: 100vh;
+            padding-bottom: 50px;
+            transition: opacity 0.5s ease;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #6272a4, #bd93f9);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 15px auto 30px auto;
+        }
+
+        .launch-btn {
+            background-color: #50fa7b;
+            color: #282a36;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(80, 250, 123, 0.4);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .launch-btn:hover {
+            transform: scale(1.05);
+            background-color: #40c563;
+        }
+
+        /* Content Grid */
+        .content-container {
+            max-width: 1000px;
+            margin: -30px auto 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card {
+            background: #282a36;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-top: 4px solid #bd93f9;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #8be9fd;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p,
+        .card li {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #f8f8f2;
+        }
+
+        .card ul {
+            padding-left: 20px;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: #44475a;
+            color: #ff79c6;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        /* === TRANSLATION APP STYLES (Hidden Initially) === */
+        #appScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #121212;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            color: white;
+        }
+
+        .app-container {
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 15px;
+            background: #000;
+            transform: scaleX(-1);
+            flex-grow: 1;
+            object-fit: cover;
+            max-height: 50vh;
+            margin-bottom: 20px;
+        }
+
+        .output-box {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: bold;
+            border-left: 5px solid #bd93f9;
+            margin-bottom: 20px;
+            min-height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chip-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .chip {
+            background: #44475a;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #6272a4;
+        }
+
+        .action-btn {
+            background: #bd93f9;
+            color: #282a36;
+            border: none;
+            padding: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .action-btn:hover {
+            filter: brightness(1.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="landingPage">
+        <div class="hero">
+            <h1>SignBridge AI</h1>
+            <p>Bridging the communication gap between deaf individuals and hearing communities through real-time,
+                edge-processed computer vision.</p>
+            <button class="launch-btn" onclick="startApp()">Launch Live Prototype</button>
+        </div>
+
+        <div class="content-container">
+            <div class="card">
+                <h2>🎯 Why This Project?</h2>
+                <p>Everyday transactional interactions are currently frictionless for hearing individuals, but present
+                    significant barriers for the deaf and mute community.</p>
+                <p>Existing translation tools rely heavily on typing, which is slow and removes the natural flow of
+                    face-to-face conversation. We need a solution that translates gestures instantly, just like spoken
+                    language.</p>
+            </div>
+
+            <div class="card">
+                <h2>⚙️ How It Works</h2>
+                <p>SignBridge utilizes the device's native camera to track hand and body geometry in real-time.</p>
+                <ul>
+                    <li><b>Capture:</b> OpenCV processes the live video feed.</li>
+                    <li><b>Track:</b> Google MediaPipe maps spatial coordinates of the hands.</li>
+                    <li><b>Translate:</b> A trained Neural Network classifies the gesture.</li>
+                    <li><b>Output:</b> Text-to-Speech vocalizes the request.</li>
+                </ul>
+                <div class="tag-container">
+                    <span class="tag">Python</span>
+                    <span class="tag">FastAPI</span>
+                    <span class="tag">TensorFlow</span>
+                    <span class="tag">MediaPipe</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🚀 Key Advantages</h2>
+                <ul>
+                    <li><b>Offline Edge AI:</b> Runs entirely on local device hardware. No internet required for basic
+                        shopping vocabulary, solving connectivity issues.</li>
+                    <li><b>Multilingual Output:</b> Can process gestures and output audio in regional languages.</li>
+                    <li><b>Context-Aware:</b> Predicts the rest of the sentence based on the first gesture to speed up
+                        communication.</li>
+                </ul>
+            </div>
+
+            <div class="card" style="border-top-color: #ff5555;">
+                <h2>⚠️ Current Limitations</h2>
+                <ul>
+                    <li><b>Lighting Dependent:</b> Computer vision currently struggles in low-light environments.</li>
+                    <li><b>Hardware Demands:</b> Continuous video processing drains mobile battery quickly.</li>
+                    <li><b>Dialect Variance:</b> Sign language varies heavily by region, requiring localized datasets
+                        for training.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="appScreen">
+        <div class="app-container">
+            <div class="app-header">
+                <h3 style="margin: 0; color: #8be9fd;">Live Translator</h3>
+                <button class="back-btn" onclick="exitApp()">✕ Close</button>
+            </div>
+
+            <video id="webcam" autoplay playsinline></video>
+
+            <div class="output-box" id="translationText">Ready for input...</div>
+
+            <div class="chip-container" id="predictiveChips">
+                <div class="chip">...is this?</div>
+                <div class="chip">...does this cost?</div>
+            </div>
+
+            <button class="action-btn" id="translateBtn" onclick="runFakeAI()">Record Gesture</button>
+        </div>
+    </div>
+
+    <script>
+        let videoStream = null;
+
+        function startApp() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('appScreen').style.display = 'flex';
+
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
+                .then(stream => {
+                    videoStream = stream;
+                    document.getElementById('webcam').srcObject = stream;
+                })
+                .catch(err => {
+                    console.error("Camera error:", err);
+                    document.getElementById('translationText').innerText = "Camera permission denied.";
+                });
+        }
+
+        function exitApp() {
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+            }
+
+            document.getElementById('landingPage').style.display = 'block';
+            document.getElementById('appScreen').style.display = 'none';
+            document.getElementById('translationText').innerText = "Ready for input...";
+            document.getElementById('predictiveChips').style.opacity = "0";
+            document.getElementById('translateBtn').innerText = "Record Gesture";
+            document.getElementById('translateBtn').style.background = "#bd93f9";
+        }
+
+        function runFakeAI() {
+            const btn = document.getElementById('translateBtn');
+            const output = document.getElementById('translationText');
+            const chips = document.getElementById('predictiveChips');
+
+            btn.innerText = "Tracking Geometry...";
+            btn.style.background = "#ffb86c";
+            output.innerText = "Analyzing...";
+            chips.style.opacity = "0";
+
+            setTimeout(() => {
+                output.innerText = "How much";
+                btn.innerText = "Record Next Gesture";
+                btn.style.background = "#50fa7b";
+                chips.style.opacity = "1";
+
+                let utterance = new SpeechSynthesisUtterance("How much");
+                speechSynthesis.speak(utterance);
+            }, 2000);
+        }
+    </script>
+
+</body>
+
+</html>
