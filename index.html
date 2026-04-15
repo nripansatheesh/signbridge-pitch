@@ -1,125 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignVoice | AI Concept Pitch</title>
+    <title>SignVoice | AI Assistant</title>
     <style>
-        :root { 
-            --bg: #121212; 
-            --card: #1e1e2e; 
-            --accent: #bd93f9; 
-            --text: #ffffff; 
-            --green: #50fa7b; 
-            --cyan: #8be9fd; 
-            --red: #ff5555; 
-            --secondary: #44475a; 
+        :root {
+            --bg: #121212;
+            --card: #1e1e2e;
+            --accent: #bd93f9;
+            --text: #ffffff;
+            --green: #50fa7b;
+            --cyan: #8be9fd;
+            --red: #ff5555;
+            --secondary: #44475a;
         }
 
-        body, html { 
-            margin: 0; 
-            padding: 0; 
-            font-family: 'Arial Black', 'Arial', sans-serif; 
-            font-weight: 900; 
-            background-color: var(--bg); 
-            color: var(--text); 
-            scroll-behavior: smooth; 
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-weight: 900;
+            background-color: var(--bg);
+            color: var(--text);
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
         }
-        
-        /* === LANDING PAGE === */
-        #introPage { width: 100%; min-height: 100vh; padding-bottom: 50px; }
-        .hero-banner { 
-            background: linear-gradient(135deg, #282a36, #6272a4); 
-            padding: 50px 20px; 
-            text-align: center; 
+
+        /* === LANDING PAGE / PROJECT BRIEFING === */
+        #introPage {
+            width: 100%;
+            min-height: 100vh;
+            padding-bottom: 80px;
+            display: block;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, #282a36, #6272a4);
+            padding: 60px 20px;
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            border-bottom: 3px solid var(--accent); 
+            border-bottom: 3px solid var(--accent);
         }
-        .proto-badge { background: var(--red); color: white; padding: 6px 15px; border-radius: 5px; font-size: 12px; text-transform: uppercase; margin-bottom: 15px; }
-        .hero-banner h1 { font-size: 3em; margin: 10px 0; color: var(--cyan); letter-spacing: -1px; }
-        .hero-banner p { max-width: 600px; margin: 0 auto; opacity: 0.9; font-size: 1.2em; line-height: 1.3; }
-        
-        .listing-container { max-width: 1100px; margin: 20px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr; gap: 20px; }
-        @media (min-width: 850px) { .listing-container { grid-template-columns: 2fr 1fr; gap: 40px; margin-top: 40px; } }
-        
-        .section-title { font-size: 1.8em; color: var(--accent); border-bottom: 4px solid var(--secondary); padding-bottom: 8px; margin-bottom: 20px; text-transform: uppercase; }
-        
-        .feature-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        @media (min-width: 600px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
-        .feat-card { background: var(--card); padding: 25px; border: 3px solid #333; height: 100%; box-sizing: border-box; }
-        .feat-card h4 { margin: 0 0 10px 0; color: var(--green); font-size: 1.2em; text-transform: uppercase; }
-        
-        .sidebar-card { background: var(--card); padding: 35px; text-align: center; border: 4px solid var(--green); box-shadow: 10px 10px 0px var(--secondary); }
-        .cta-btn { background: var(--green); color: var(--bg); border: none; width: 100%; padding: 20px; font-size: 1.4em; font-weight: 900; cursor: pointer; transition: 0.2s; margin-top: 15px; text-transform: uppercase; }
+
+        .proto-badge {
+            background: var(--red);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .hero-banner h1 {
+            font-size: 3.2em;
+            margin: 10px 0;
+            color: var(--cyan);
+            letter-spacing: -1px;
+        }
+
+        .hero-banner p {
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+            font-size: 1.2em;
+            line-height: 1.3;
+        }
+
+        .listing-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 850px) {
+            .listing-container {
+                grid-template-columns: 2fr 1fr;
+                gap: 40px;
+                margin-top: 40px;
+            }
+        }
+
+        /* Cards & Content Sections */
+        .main-col section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: var(--accent);
+            border-bottom: 4px solid var(--secondary);
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        @media (min-width: 600px) {
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .feat-card {
+            background: var(--card);
+            padding: 25px;
+            border-radius: 0px;
+            border: 3px solid #333;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .feat-card h4 {
+            margin: 0 0 10px 0;
+            color: var(--green);
+            font-size: 1.2em;
+            text-transform: uppercase;
+        }
+
+        .feat-card p {
+            font-size: 1em;
+            margin: 0;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        /* Briefing Section Styles */
+        .vision-text {
+            font-size: 1.25em;
+            line-height: 1.6;
+            color: var(--green);
+        }
+
+        .timeline {
+            list-style: none;
+            padding: 0;
+            font-size: 1.1em;
+        }
+
+        .timeline li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .timeline li:before {
+            content: '✓';
+            color: var(--green);
+            position: absolute;
+            left: 0;
+            font-weight: 900;
+        }
+
+        /* Sidebar Styles */
+        .sidebar-card {
+            background: var(--card);
+            padding: 35px;
+            border-radius: 0px;
+            text-align: center;
+            border: 4px solid var(--green);
+            box-shadow: 10px 10px 0px var(--secondary);
+            position: sticky;
+            top: 20px;
+        }
+
+        .cta-btn {
+            background: var(--green);
+            color: var(--bg);
+            border: none;
+            width: 100%;
+            padding: 20px;
+            font-size: 1.4em;
+            font-weight: 900;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+
+        .cta-btn:hover {
+            background: var(--cyan);
+            transform: translate(-3px, -3px);
+            box-shadow: 5px 5px 0px white;
+        }
 
         /* === APP PROTOTYPE SHELL === */
-        #appShell { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; background: var(--bg); display: none; z-index: 1000; overflow: hidden; }
-        .app-container { width: 100%; max-width: 450px; margin: 0 auto; height: 100vh; position: relative; background: var(--bg); display: flex; flex-direction: column; border: 2px solid #333; }
-        
-        .screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; padding: 25px; box-sizing: border-box; overflow-y: auto; }
-        .active { display: flex; }
-        
-        .header { display: flex; align-items: center; margin-bottom: 25px; padding-top: 10px; }
-        .back-btn { background: none; border: none; color: var(--accent); font-size: 35px; cursor: pointer; padding-right: 20px; font-weight: 900; }
-        
-        .menu-item { background: var(--card); padding: 22px; margin-bottom: 15px; border-left: 8px solid var(--accent); cursor: pointer; }
-        .menu-item h3 { margin: 0 0 5px 0; color: var(--cyan); font-size: 1.2em; text-transform: uppercase; }
-        .menu-item p { margin: 0; font-size: 0.9em; opacity: 0.9; }
-
-        video { width: 100%; aspect-ratio: 3 / 4; background: #000; transform: scaleX(-1); object-fit: cover; border: 4px solid #333; }
-        .output-box { background: #000; padding: 25px; font-size: 24px; font-weight: 900; border-left: 10px solid var(--accent); margin: 20px 0; color: var(--green); text-transform: uppercase; }
-        .start-btn { background: var(--green); color: var(--bg); border: none; padding: 20px 60px; font-size: 1.5em; font-weight: 900; cursor: pointer; margin-top: 30px; text-transform: uppercase; }
-
-        /* === CUSTOM POPUP MODAL (No URL/Name) === */
-        .modal-overlay { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.85); display: none; justify-content: center; 
-            align-items: center; z-index: 2000; padding: 20px; box-sizing: border-box; 
-        }
-        .modal-content { 
-            background: var(--card); border: 4px solid var(--accent); padding: 30px; 
-            width: 100%; max-width: 320px; text-align: center; 
-        }
-        .modal-content h3 { color: var(--cyan); text-transform: uppercase; margin-top: 0; }
-        .modal-btn { 
-            background: var(--green); border: none; padding: 12px 30px; 
-            font-weight: 900; margin-top: 20px; cursor: pointer; width: 100%; text-transform: uppercase;
+        #appShell {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: var(--bg);
+            display: none;
+            z-index: 1000;
+            overflow: hidden;
         }
 
-        #splash { justify-content: center; align-items: center; text-align: center; }
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            height: 100vh;
+            position: relative;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #333;
+        }
+
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            padding: 25px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .active {
+            display: flex;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-top: 10px;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 35px;
+            cursor: pointer;
+            padding-right: 20px;
+            font-weight: 900;
+        }
+
+        .menu-item {
+            background: var(--card);
+            padding: 22px;
+            margin-bottom: 15px;
+            border-left: 8px solid var(--accent);
+            cursor: pointer;
+            border-radius: 0px;
+        }
+
+        .menu-item h3 {
+            margin: 0 0 5px 0;
+            color: var(--cyan);
+            font-size: 1.2em;
+            text-transform: uppercase;
+        }
+
+        .menu-item p {
+            margin: 0;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* FIXED LOGO STYLE */
+        .main-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(189, 147, 249, 0.4);
+        }
+
+        /* VIDEO STYLE */
+        video {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            background: #000;
+            transform: scaleX(-1);
+            object-fit: cover;
+            border: 4px solid #333;
+        }
+
+        .output-box {
+            background: #000;
+            padding: 25px;
+            font-size: 24px;
+            font-weight: 900;
+            border-left: 10px solid var(--accent);
+            margin: 20px 0;
+            color: var(--green);
+            text-transform: uppercase;
+        }
+
+        /* CUSTOM MODAL */
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-content {
+            background: var(--card);
+            border: 4px solid var(--accent);
+            padding: 30px;
+            width: 100%;
+            max-width: 320px;
+            text-align: center;
+            border-radius: 0px;
+        }
+
+        .modal-content h3 {
+            color: var(--cyan);
+            text-transform: uppercase;
+            margin-top: 0;
+            font-size: 1.4em;
+        }
+
+        .modal-content p {
+            font-size: 1em;
+            opacity: 0.9;
+            margin: 15px 0 25px 0;
+            text-transform: lowercase;
+        }
+
+        .modal-btn {
+            background: var(--green);
+            color: var(--bg);
+            border: none;
+            padding: 15px 30px;
+            font-weight: 900;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            font-size: 1.2em;
+        }
+
+        #splash {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
 
     <div id="introPage">
         <div class="hero-banner">
-            <div class="proto-badge">Prototype Concept</div>
-            <h1>SIGNVOICE</h1>
-            <p>REMOVING COMMUNICATION BARRIERS WITH REAL-TIME AI</p>
+            <div class="proto-badge">Prototype Briefing</div>
+            <h1>SIGNVOICE AI</h1>
+            <p>REMOVING COMMUNICATION BARRIERS IN PUBLIC SPACES</p>
         </div>
 
         <div class="listing-container">
             <div class="main-col">
                 <section>
-                    <h2 class="section-title">THE PROBLEM</h2>
-                    <p>PUBLIC INTERACTION IN BANKS, SHOPS, AND HOSPITALS IS A STRUGGLE FOR DEAF INDIVIDUALS. SIGNVOICE USES AI TO BRIDGE THIS GAP INSTANTLY.</p>
+                    <h2 class="section-title">THE VISION</h2>
+                    <p class="vision-text">SIGNVOICE IS MORE THAN AN APP; IT IS A BARRIER-FREE WORLD. WE AIM TO EMPOWER
+                        THE DEAF AND MUTE COMMUNITY TO COMMUNICATE EFFORTLESSLY IN HOSPITALS, BANKS, AND LOCAL
+                        SHOPS—RECLAIMING THEIR INDEPENDENCE THROUGH SEAMLESS, REAL-TIME AI.</p>
                 </section>
+
+                <section>
+                    <h2 class="section-title">HOW IT WORKS (DEEP DIVE)</h2>
+                    <div class="feature-grid">
+                        <div class="feat-card">
+                            <h4>1. Capture & tracking</h4>
+                            <p>Computer Vision (OpenCV) captures the live feed. MediaPipe extracts spatial coordinates
+                                of hand landmark points in real-time.</p>
+                        </div>
+                        <div class="feat-card">
+                            <h4>2. Gesture classification</h4>
+                            <p>A Convolutional Neural Network (CNN) in TensorFlow analyzes the landmarks to identify and
+                                classify the sign.</p>
+                        </div>
+                        <div class="feat-card">
+                            <h4>3. Sign → Audio</h4>
+                            <p>The classified sign is instantly converted into spoken audio using native Text-to-Speech
+                                (TTS) libraries.</p>
+                        </div>
+                        <div class="feat-card">
+                            <h4>4. Audio → Sign</h4>
+                            <p>The shopkeeper’s spoken reply is converted to text (STT) and displayed as clear sign
+                                language animations.</p>
+                        </div>
+                    </div>
+                </section>
+
                 <section>
                     <h2 class="section-title">ADVANTAGES</h2>
-                    <ul style="padding-left:25px; line-height:1.8;">
-                        <li>INDEPENDENCE IN PUBLIC HUBS</li>
-                        <li>INCLUSIVE LEARNING FOR HEARING PEOPLE</li>
-                        <li>LOW-COST MOBILE DEPLOYMENT</li>
+                    <ul class="timeline">
+                        <li>Instant independence in shops, banks, and schools.</li>
+                        <li>Reduced social isolation and increased social inclusion.</li>
+                        <li>Low-cost, mobile-deployed digital interpreter.</li>
+                        <li>Learning Mode assists normal people in learning sign language.</li>
                     </ul>
                 </section>
+
+                <section>
+                    <h2 class="section-title">PROJECT BLUEPRINT</h2>
+                    <div class="feature-grid">
+                        <div class="feat-card">
+                            <h4 style="color:var(--cyan)">Phase 1: Concept</h4>
+                            <p>UI/UX definition, hand tracking optimization, and concept vocabulary development
+                                (Malayalam context).</p>
+                        </div>
+                        <div class="feat-card">
+                            <h4 style="color:var(--cyan)">Phase 2: Product</h4>
+                            <p>Offline model integration, cross-platform mobile deployment using Flutter, and expanded
+                                gesture sets.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="section-title" style="color:var(--red); border-bottom-color: var(--red);">CHALLENGES &
+                        LIMITATIONS</h2>
+                    <div class="feature-grid">
+                        <div class="feat-card">
+                            <h4>Environmental dependency</h4>
+                            <p>COMPUTER VISION STRUGGLES IN LOW-LIGHT OR DUSTY ENVIRONMENTS, IMPACTING SIGN RECOGNITION
+                                ACCURACY.</p>
+                        </div>
+                        <div class="feat-card">
+                            <h4>Dialect variance</h4>
+                            <p>SIGN LANGUAGE IN INDIA (ISL) VARIES REGIONALLY, REQUIRING LOCALIZED VOCABULARY DATASETS
+                                FOR TRAINING.</p>
+                        </div>
+                    </div>
+                </section>
             </div>
+
             <div class="sidebar-col">
                 <div class="sidebar-card">
-                    <h3 style="margin:0; text-transform: uppercase;">INTERACTIVE DEMO</h3>
-                    <p style="font-size:1em; opacity:0.8; margin-top:10px;">LAUNCH THE PROTOTYPE INTERFACE</p>
+                    <h3 style="margin:0; text-transform: uppercase;">Launch Demo</h3>
+                    <p style="font-size:1em; opacity:0.8; margin-top:10px;">EXPERIENCE THE SIGNVOICE INTERFACE</p>
                     <button class="cta-btn" onclick="openApp()">RUN PROTOTYPE</button>
+                    <p style="font-size:0.7em; margin-top:15px; color:var(--red);">* REQUIRES CAMERA PERMISSIONS</p>
                 </div>
             </div>
         </div>
@@ -127,7 +471,7 @@
 
     <div id="appShell">
         <div class="app-container">
-            
+
             <div id="customModal" class="modal-overlay" onclick="closeModal()">
                 <div class="modal-content" onclick="event.stopPropagation()">
                     <h3 id="modalTitle">NOTIFICATION</h3>
@@ -137,10 +481,10 @@
             </div>
 
             <div id="splash" class="screen active">
-                <div style="font-size:100px">🤟</div>
+                <img src="image_edff41.jpg" class="main-logo" alt="SignVoice Logo">
                 <h1 style="font-size: 3em;">SIGNVOICE</h1>
                 <p>AI COMMUNICATION ASSISTANT</p>
-                <button class="start-btn" onclick="nav('home')">ENTER APP</button>
+                <button class="cta-btn start-btn" onclick="nav('home')">ENTER APP</button>
             </div>
 
             <div id="home" class="screen">
@@ -179,7 +523,8 @@
                 </div>
                 <video id="webcam" autoplay playsinline></video>
                 <div class="output-box" id="signText">AWAITING GESTURE...</div>
-                <button class="cta-btn" onclick="runSignDemo()">DETECT SIGN</button>
+                <p style="font-size:0.8em; opacity:0.7; text-align:center;">Perform the Malayalam sign for "Water"</p>
+                <button class="cta-btn start-btn" id="detectBtn" onclick="runSignDemo()">DETECT SIGN</button>
             </div>
 
             <div id="voiceToSign" class="screen">
@@ -189,7 +534,8 @@
                 </div>
                 <div class="output-box" id="voiceText">WAITING FOR SPEECH...</div>
                 <div style="font-size:80px; text-align:center; margin-top:20px;" id="signAnim">🎤</div>
-                <button class="cta-btn" style="background:var(--cyan)" onclick="runVoiceDemo()">RECORD VOICE</button>
+                <button class="cta-btn start-btn" style="background:var(--cyan)" id="voiceBtn"
+                    onclick="runVoiceDemo()">RECORD VOICE</button>
             </div>
         </div>
     </div>
@@ -197,40 +543,60 @@
     <script>
         let videoStream = null;
 
-        // Custom Modal Logic
+        // --- Custom Modal Logic ---
         function showMsg(title, msg) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalMsg').innerText = msg;
             document.getElementById('customModal').style.display = 'flex';
         }
+        function closeModal() { document.getElementById('customModal').style.display = 'none'; }
 
-        function closeModal() {
-            document.getElementById('customModal').style.display = 'none';
-        }
-
+        // --- Core Navigation ---
         function openApp() { document.getElementById('introPage').style.display = 'none'; document.getElementById('appShell').style.display = 'block'; }
         function closeApp() { stopCamera(); document.getElementById('introPage').style.display = 'block'; document.getElementById('appShell').style.display = 'none'; }
         function nav(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
-        
-        function startCamera() { 
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } }).then(s => { 
-                videoStream = s; document.getElementById('webcam').srcObject = s; 
-            }).catch(e => showMsg('ERROR', 'camera permission denied.')); 
+
+        // --- Camera Management ---
+        function startCamera() {
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } }).then(s => {
+                videoStream = s; document.getElementById('webcam').srcObject = s;
+            }).catch(e => showMsg('ERROR', 'camera permission denied. check browser settings.'));
         }
-        
+
         function stopCamera() { if (videoStream) { videoStream.getTracks().forEach(t => t.stop()); } }
-        
+
+        // --- Demo Logic ---
         function runSignDemo() {
             const out = document.getElementById('signText');
+            const btn = document.getElementById('detectBtn');
             out.innerText = "ANALYZING...";
-            setTimeout(() => { out.innerText = "I WANT WATER"; speechSynthesis.speak(new SpeechSynthesisUtterance("I want water")); }, 1500);
+            btn.innerText = "Analyzing...";
+            btn.style.background = "#e67e22";
+
+            setTimeout(() => {
+                out.innerText = "I WANT WATER";
+                btn.innerText = "DETECT SIGN";
+                btn.style.background = "var(--green)";
+                speechSynthesis.speak(new SpeechSynthesisUtterance("I want water"));
+            }, 1800);
         }
-        
+
         function runVoiceDemo() {
             const out = document.getElementById('voiceText');
+            const anim = document.getElementById('signAnim');
+            const btn = document.getElementById('voiceBtn');
             out.innerText = "LISTENING...";
-            setTimeout(() => { out.innerText = "DO YOU WANT COLD WATER?"; document.getElementById('signAnim').innerText = "🤟🥤"; }, 2000);
+            btn.innerText = "Listening...";
+            btn.style.background = "var(--secondary)";
+
+            setTimeout(() => {
+                out.innerText = "DO YOU WANT COLD WATER?";
+                btn.innerText = "RECORD VOICE";
+                btn.style.background = "var(--cyan)";
+                anim.innerText = "🤟🥤"; // Placeholder for Malayalam sign
+            }, 2000);
         }
     </script>
 </body>
+
 </html>
