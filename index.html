@@ -102,19 +102,17 @@
             background-color: var(--bg);
             z-index: 9999;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             transition: opacity 0.6s ease;
         }
 
         .startup-logo {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             object-fit: cover;
             border-radius: 50%;
             border: 5px solid var(--accent);
-            margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
 
@@ -381,6 +379,7 @@
             align-items: center;
             margin-bottom: 25px;
             padding-top: 10px;
+            width: 100%;
         }
 
         .back-btn {
@@ -399,7 +398,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            margin-top: 30px;
+            margin-top: 10px;
         }
 
         .input-group {
@@ -552,7 +551,6 @@
 
     <div id="startupSplash">
         <img src="image_edff41.JPG" class="startup-logo" alt="SignVoice Logo">
-        <h1 style="font-size: 3em; margin: 0; color: var(--cyan); letter-spacing: -1px;">SIGNVOICE</h1>
     </div>
 
     <div id="introPage">
@@ -622,8 +620,7 @@
                         </div>
                         <div class="feat-card">
                             <h4 style="color:var(--cyan)">Global Translation Matrix</h4>
-                            <p>Scalable architecture designed to translate regional sign languages into local
-                                and major
+                            <p>Scalable architecture designed to translate regional sign languages into major
                                 international spoken languages, maximizing global utility.</p>
                         </div>
                         <div class="feat-card">
@@ -661,7 +658,7 @@
                 <div class="sidebar-card">
                     <h3 style="margin:0; text-transform: uppercase;">Launch Demo</h3>
                     <p style="font-size:1em; opacity:0.8; margin-top:10px;">EXPERIENCE THE SIGNVOICE INTERFACE</p>
-                    <button class="cta-btn" onclick="openAppTo('loginScreen')">RUN PROTOTYPE</button>
+                    <button class="cta-btn" onclick="runPrototypeTransition()">RUN PROTOTYPE</button>
                     <p style="font-size:0.7em; margin-top:15px; color:var(--red);">* REQUIRES CAMERA PERMISSIONS</p>
                 </div>
             </div>
@@ -679,8 +676,15 @@
                 </div>
             </div>
 
-            <div id="loginScreen" class="screen"
-                style="text-align: center; justify-content: center; align-items: center;">
+            <div id="appSplash" class="screen" style="justify-content: center; align-items: center;">
+                <img src="image_edff41.JPG" class="startup-logo" alt="SignVoice Logo">
+            </div>
+
+            <div id="loginScreen" class="screen" style="align-items: center;">
+                <div class="header">
+                    <button class="back-btn" onclick="closeApp()">✕</button>
+                </div>
+
                 <h2 style="color:var(--cyan); text-transform: uppercase; font-size: 2.2em; margin-bottom: 5px;">WELCOME
                     BACK</h2>
                 <p style="opacity: 0.8; font-family: 'Arial', sans-serif; margin-bottom: 20px;">Sign in to sync your
@@ -765,7 +769,7 @@
 
         // --- AUTO STARTUP LOGIC ---
         window.onload = () => {
-            // Wait 2 seconds, then fade out the splash screen
+            // Wait 2 seconds, then fade out the initial website splash screen
             setTimeout(() => {
                 const splash = document.getElementById('startupSplash');
                 splash.style.opacity = '0';
@@ -774,7 +778,7 @@
                 setTimeout(() => {
                     splash.style.display = 'none';
                     document.getElementById('introPage').style.display = 'block';
-                }, 600); // 600ms matches the CSS transition time
+                }, 600);
             }, 2000);
         };
 
@@ -791,11 +795,31 @@
             document.getElementById('appShell').style.display = 'block';
             nav(screenId);
         }
+
+        // --- PROTOTYPE TRANSITION (Bypasses Login) ---
+        function runPrototypeTransition() {
+            openAppTo('appSplash');
+            // Show the logo for 1.5 seconds, then auto-navigate to the Dashboard
+            setTimeout(() => {
+                nav('home');
+            }, 1500);
+        }
+
+        // --- SPLASH TRANSITION AFTER LOGIN ---
+        function runAppSplashTransition() {
+            nav('appSplash');
+            // Show the logo for 1.5 seconds, then auto-navigate to the Dashboard
+            setTimeout(() => {
+                nav('home');
+            }, 1500);
+        }
+
         function closeApp() {
             stopCamera();
             document.getElementById('introPage').style.display = 'block';
             document.getElementById('appShell').style.display = 'none';
         }
+
         function nav(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
@@ -811,7 +835,9 @@
             setTimeout(() => {
                 btn.style.display = 'block';
                 loader.style.display = 'none';
-                nav('home'); // Go to dashboard on success
+
+                // After successful login, trigger the transition splash!
+                runAppSplashTransition();
             }, 1500);
         }
 
